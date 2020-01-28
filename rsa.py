@@ -14,7 +14,7 @@ def achar_d(e, totiente):
 def primos_entre_si(n):
     resultado = []
 
-    for i in range(n):
+    for i in range(1, n):
         if(MDC(n, i) == 1):
             resultado.append(i)
     return random.choice(resultado)
