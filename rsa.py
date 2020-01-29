@@ -33,8 +33,17 @@ def MDC(p, q):
         return MDC(q, p%q)
 
 def main():
-    print("AQUI VAI AS ESCOLHAS")
-
+    print("  ####################################################")
+    print("  ##        ENCRIPTAÇÃO E DESENCRIPTAÇÃO RSA        ##")
+    print("  ####################################################")
+    print("  ##        Escolha uma das opções á seguir:        ##")
+    print("  ##------------------------------------------------##")
+    print("  ## 1: GERAR CHAVE PUBLICA                         ##")
+    print("  ## 2: ENCRIPTAR                                   ##")
+    print("  ## 3: DESENCRIPTAR                                ##")
+    print("  ## 4: SAIR                                        ##")
+    print("  ####################################################")
+    
     escolha = int(input())
 
     if(escolha == 1):
