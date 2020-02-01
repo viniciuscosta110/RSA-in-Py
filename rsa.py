@@ -10,8 +10,9 @@ def limpar_terminal():
 def verificar_primos(x):
     if(x <= 1):
         return False
-    for c in range(2,math.sqrt(x) + 1):
-        if(x % c == 0):
+    aux = math.ceil(math.sqrt(x))
+    for i in range(2,aux):
+        if(x % i == 0):
             return False
     return True
 
