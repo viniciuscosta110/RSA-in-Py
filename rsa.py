@@ -1,6 +1,15 @@
 import os
 import math
 
+def fastModularExponentiation(m, e, n):
+    if(e == 0):
+        return 1
+    elif(e%2 == 0):
+        aux = fastModularExponentiation(m, e/2, n)
+        return (aux**2)%n
+    else:
+        return(m%n*fastModularExponentiation(m, e-1, n))%n
+
 def limpar_terminal():
     if (os.name == "nt"):
         os.system("cls")
