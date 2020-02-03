@@ -1,6 +1,53 @@
 import os
 import math
 
+def inverso(num1, num2):
+    num3 = num2
+    coeficientes = []
+    array_aux = []
+    indices = []
+
+    tamanho=1
+    aux2 = 1
+
+    a = num1/num2
+    a = int(a)
+    coeficientes.append(a)
+    b = num1%num2
+
+    while(b!=0):
+        num1 = num2
+        num2 = b
+        a = num1/num2
+        a = int(a)
+        b = num1%num2
+        
+        coeficientes.append(a)
+        tamanho += 1
+    aux4 = tamanho-1
+    j=aux4-1
+
+    for i in range(0,aux4):
+        array_aux.append(coeficientes[j])
+        j -= 1
+
+    aux2 = 1
+    anterior = 0
+    x = anterior
+
+    for i in range(0,aux4):
+        indices.append(array_aux[i]*aux2 + anterior)
+        anterior = aux2
+        aux2 = array_aux[i]*aux2 + x
+        x = anterior
+  
+    if(aux4 % 2 == 0):
+        indices[aux4-2] = -indices[aux4-2]
+        while(indices[aux4-2]<1):
+            indices[aux4-2] = indices[aux4-2] + num3
+
+    return indices[aux4-2]
+
 def fastModularExponentiation(m, e, n):
     if(e == 0):
         return 1
