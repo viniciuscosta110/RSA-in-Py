@@ -63,6 +63,11 @@ def limpar_terminal():
     else:
         os.system("clear")
 
+def limpar_arquivo(apagar):
+
+    arquivo = open(apagar, 'w')
+    arquivo.close()
+
 def verificar_primos(x):
     if(x <= 1):
         return False
@@ -98,8 +103,8 @@ def msg_criptografada(x):
     arquivo.write("{}\n".format(x))
     arquivo.close()
     
-def msg_descriptografada(x):
-    arquivo = open('msg_descriptografada.txt', 'w')
+def msg_descriptografada(x): 
+    arquivo = open('msg_descriptografada.txt', 'a')
     arquivo.write("{}\n".format(x))
     arquivo.close()
 
@@ -113,10 +118,10 @@ def criptografar(c,e,n):
     M = M % n
     return M
 
-def desencriptar(d, n):
+def desencriptar(nome_arquivo, d, n):
     array = ['@','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
 
-    arquivo = open('msg_criptografada.txt', 'r')
+    arquivo = open(nome_arquivo, 'r')
     palavras = ""
 
     for letra in arquivo:
@@ -221,6 +226,8 @@ def main():
             limpar_terminal()
 
             msg_encriptada = []
+            limpar_arquivo('msg_criptografada.txt')
+            
             for i in range(0,len(texto)):
                 msg_encriptada.append(criptografar(texto[i], e, n))
                 msg_criptografada(criptografar(texto[i], e, n))
@@ -228,6 +235,11 @@ def main():
     
         elif(escolha == 3):
             limpar_terminal()
+            print("  <==================================================>")
+            print("  <=       DIGITE O NOME DO ARQUIVO QUE DESEJA      =>")
+            print("  <=                  DESENCRIPTAR:                 =>")
+            print("  <==================================================>")
+            nome_arquivo = input("    Arquivo: ")
             print("  <==================================================>")
             print("  <=     PARA DESENCRIPTAR INSIRA OS VALORES DE:    =>")
             print("  <=                 (p), (q) e (e)                 =>")
@@ -240,7 +252,10 @@ def main():
             n = p * q
             d = inverso(e, phi)
 
-            desencriptar(d, n)
+            nome_arquivo += '.txt'
+            
+            limpar_arquivo('msg_descriptografada.txt')
+            desencriptar(nome_arquivo, d, n)
             print()
             
         elif(escolha == 4):
