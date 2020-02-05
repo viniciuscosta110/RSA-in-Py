@@ -63,6 +63,11 @@ def limpar_terminal():
     else:
         os.system("clear")
 
+def limpar_arquivo(apagar):
+
+    arquivo = open(apagar, 'w')
+    arquivo.close()
+
 def verificar_primos(x):
     if(x <= 1):
         return False
@@ -88,51 +93,20 @@ def MDC(p, q):
 def calcular_phi(p, q):
     return (p - 1) * (q - 1)
 
-def chave_pub_1(x):
-    arquivo = open('chave_publica_1.txt' , 'w')
+def chave_pub(x):
+    arquivo = open('chave_publica.txt' , 'w')
     arquivo.write("{}\n".format(x))
-    arquivo.close()
-
-def chave_pub_2(y):
-    arquivo = open('chave_publica_2.txt', 'w')
-    arquivo.write("{}\n".format(y))
     arquivo.close()
 
 def msg_criptografada(x):
-    arquivo = open('msg_criptografada.txt', 'w')
+    arquivo = open('msg_criptografada.txt', 'a')
     arquivo.write("{}\n".format(x))
-    arquivo.close
+    arquivo.close()
     
-def msg_descriptografada(x):
-    arquivo = open('msg_descriptografada.txt', 'w')
+def msg_descriptografada(x): 
+    arquivo = open('msg_descriptografada.txt', 'a')
     arquivo.write("{}\n".format(x))
-    arquivo.close
-
-def ler_chave_pub_1():
-    arquivo = open('chave_publica_1.txt', 'r')
-    x = arquivo.read()
-    x = int(x)
-    arquivo.close
-    return(x)
-
-def ler_chave_pub_2():
-    arquivo = open('chave_publica_2.txt', 'r')
-    y = arquivo.read()
-    y = int(y)
-    arquivo.close
-    return(y)
-
-def ler_msg_criptografada():
-    arquivo = open('msg_criptografada.txt', 'r')
-    x = arquivo.read()
-    arquivo.close
-    return x
-
-def ler_msg_descriptografada():
-    arquivo = open('msg_descriptografada.txt', 'r')
-    x = arquivo.read()
-    arquivo.close
-    return x
+    arquivo.close()
 
 def criptografar(c,e,n):
     array = ['@','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
@@ -140,14 +114,27 @@ def criptografar(c,e,n):
     for i in range(0,29):
         if(c == array[i]):
             aux = i
-    M = fastModularExponentiation(aux, e, n)
+    M = pow(aux, e)
     M = M % n
     return M
 
-def desencriptar(c, d, n):
+def desencriptar(nome_arquivo, d, n):
     array = ['@','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
 
+    arquivo = open(nome_arquivo, 'r')
+    palavras = ""
+
+    for letra in arquivo:
+        letra = letra.strip()
+        c = int(letra)
+        c = fastModularExponentiation(c, d, n)
+        palavras+= array[c]
+        
+    msg_descriptografada(palavras)
+    arquivo.close()
+
 def main():
+    limpar_terminal()
     while(1):
         print("  <==================================================>")
         print("  <=        ENCRIPTAÇÃO E DESENCRIPTAÇÃO RSA        =>")
@@ -217,6 +204,10 @@ def main():
             print("  ####################################################")
             print("              CHAVE PÚBLICA: (n):{} (e):{}            ".format(n, e))
             print("  ####################################################")
+            
+            chave = str(n) +" "+ str(e)
+            chave_pub(chave)
+
         elif(escolha == 2):
             limpar_terminal()
             print("  <==================================================>")
@@ -228,26 +219,45 @@ def main():
             print("  <==================================================>")
             print("  <=     DIGITE A SUA MENSAGEM PARA ENCRIPTA-LA     =>")
             print("  <==================================================>")
+
             texto = input("    > ")
             texto = texto.upper()
+
             limpar_terminal()
-            for i in range(len(texto)):
-                print(" ", criptografar(texto[i], e, n), end="")
+
+            msg_encriptada = []
+            limpar_arquivo('msg_criptografada.txt')
+            
+            for i in range(0,len(texto)):
+                msg_encriptada.append(criptografar(texto[i], e, n))
+                msg_criptografada(criptografar(texto[i], e, n))
             print()
     
         elif(escolha == 3):
             limpar_terminal()
             print("  <==================================================>")
-            print("  <=   DIGITE A SUA MENSAGEM PARA DESENCRIPTA-LA!   =>")
+            print("  <=       DIGITE O NOME DO ARQUIVO QUE DESEJA      =>")
+            print("  <=                  DESENCRIPTAR:                 =>")
             print("  <==================================================>")
-            texto = input("    > ")
+            nome_arquivo = input("    Arquivo: ")
             print("  <==================================================>")
             print("  <=     PARA DESENCRIPTAR INSIRA OS VALORES DE:    =>")
-            print("  <=                    (n) e (d)                   =>")
+            print("  <=                 (p), (q) e (e)                 =>")
             print("  <==================================================>")
-            n = int(input("    (n): "))
-            d = int(input("    (d): "))
-    
+            p = int(input("    (p): "))
+            q = int(input("    (q): "))
+            e = int(input("    (e): "))
+
+            phi = calcular_phi(p, q)
+            n = p * q
+            d = inverso(e, phi)
+
+            nome_arquivo += '.txt'
+            
+            limpar_arquivo('msg_descriptografada.txt')
+            desencriptar(nome_arquivo, d, n)
+            print()
+            
         elif(escolha == 4):
             exit()
         else:
