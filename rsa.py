@@ -63,25 +63,6 @@ def limpar_terminal():
     else:
         os.system("clear")
 
-def limpar_arquivo():
-    x = ""
-
-    arquivo = open('chave_publica_(n).txt' , 'w')
-    arquivo.write("{}\n".format(x))
-    arquivo.close()
-
-    arquivo = open('chave_publica_(e).txt', 'w')
-    arquivo.write("{}\n".format(x))
-    arquivo.close()
-
-    arquivo = open('msg_criptografada.txt', 'w')
-    arquivo.write("{}\n".format(x))
-    arquivo.close
-
-    arquivo = open('msg_descriptografada.txt', 'w')
-    arquivo.write("{}\n".format(x))
-    arquivo.close
-
 def verificar_primos(x):
     if(x <= 1):
         return False
@@ -107,51 +88,20 @@ def MDC(p, q):
 def calcular_phi(p, q):
     return (p - 1) * (q - 1)
 
-def chave_pub_n(x):
-    arquivo = open('chave_publica_(n).txt' , 'w')
+def chave_pub(x):
+    arquivo = open('chave_publica.txt' , 'w')
     arquivo.write("{}\n".format(x))
-    arquivo.close()
-
-def chave_pub_e(y):
-    arquivo = open('chave_publica_(e).txt', 'w')
-    arquivo.write("{}\n".format(y))
     arquivo.close()
 
 def msg_criptografada(x):
     arquivo = open('msg_criptografada.txt', 'a')
     arquivo.write("{}\n".format(x))
-    arquivo.close
+    arquivo.close()
     
 def msg_descriptografada(x):
     arquivo = open('msg_descriptografada.txt', 'w')
     arquivo.write("{}\n".format(x))
-    arquivo.close
-
-def ler_chave_pub_n():
-    arquivo = open('chave_publica_(n).txt', 'r')
-    x = arquivo.read()
-    x = int(x)
-    arquivo.close
-    return(x)
-
-def ler_chave_pub_e():
-    arquivo = open('chave_publica_(e).txt', 'r')
-    y = arquivo.read()
-    y = int(y)
-    arquivo.close
-    return(y)
-
-def ler_msg_criptografada():
-    arquivo = open('msg_criptografada.txt', 'r')
-    x = arquivo.read()
-    arquivo.close
-    return x
-
-def ler_msg_descriptografada():
-    arquivo = open('msg_descriptografada.txt', 'r')
-    x = arquivo.read()
-    arquivo.close
-    return x
+    arquivo.close()
 
 def criptografar(c,e,n):
     array = ['@','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
@@ -250,8 +200,8 @@ def main():
             print("              CHAVE PÚBLICA: (n):{} (e):{}            ".format(n, e))
             print("  ####################################################")
             
-            chave_pub_n(n)
-            chave_pub_e(e)
+            chave = str(n) +" "+ str(e)
+            chave_pub(chave)
 
         elif(escolha == 2):
             limpar_terminal()
@@ -275,8 +225,6 @@ def main():
                 msg_encriptada.append(criptografar(texto[i], e, n))
                 msg_criptografada(criptografar(texto[i], e, n))
             print()
-
-            print(msg_encriptada)
     
         elif(escolha == 3):
             limpar_terminal()
@@ -293,6 +241,7 @@ def main():
             d = inverso(e, phi)
 
             desencriptar(d, n)
+            print()
             
         elif(escolha == 4):
             exit()
