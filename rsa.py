@@ -100,7 +100,7 @@ def chave_pub(x):
 
 def msg_criptografada(x):
     arquivo = open('msg_criptografada.txt', 'a')
-    arquivo.write("{}\n".format(x))
+    arquivo.write("{} ".format(x))
     arquivo.close()
     
 def msg_descriptografada(x): 
@@ -122,12 +122,18 @@ def desencriptar(nome_arquivo, d, n):
     array = ['@','@','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
 
     arquivo = open(nome_arquivo, 'r')
+    msg = arquivo.read().split(" ")
     palavras = ""
-
-    for letra in arquivo:
-        c = int(letra)
+    tamanho = msg.__len__()
+    tamanho -= 1
+    
+    for i in range (0, tamanho):
+        if(msg[i] == " "):
+            break
+        c = msg[i]
+        c = int(c)
         c = fastModularExponentiation(c, d, n)
-        palavras+= array[c]
+        palavras += array[c]
         
     msg_descriptografada(palavras)
     arquivo.close()
