@@ -1,52 +1,52 @@
 import os
 import math
 
-def inverso(num1, num2):
-    num3 = num2
-    coeficientes = []
-    array_aux = []
+def inverso(e, phi):
+
+    phi2 = phi
+    coeficientes = [] 
+    coeficientes_invertidos = []
     indices = []
 
-    tamanho=1
-    aux2 = 1
+    tamanho=0
+    tabela = 1
 
-    a = num1/num2
+    a = e/phi
     a = int(a)
     coeficientes.append(a)
-    b = num1%num2
+    b = e%phi
 
     while(b!=0):
-        num1 = num2
-        num2 = b
-        a = num1/num2
+        e = phi
+        phi = b
+        a = e/phi
         a = int(a)
-        b = num1%num2
+        b = e%phi
         
         coeficientes.append(a)
         tamanho += 1
-    aux4 = tamanho-1
-    j=aux4-1
+   
+    j=tamanho-1
 
-    for i in range(0,aux4):
-        array_aux.append(coeficientes[j])
+    for i in range(0,tamanho):
+        coeficientes_invertidos.append(coeficientes[j])
         j -= 1
 
-    aux2 = 1
+    tabela = 1
     anterior = 0
-    x = anterior
 
-    for i in range(0,aux4):
-        indices.append(array_aux[i]*aux2 + anterior)
-        anterior = aux2
-        aux2 = array_aux[i]*aux2 + x
-        x = anterior
+    for i in range(0,tamanho):
+        indices.append(coeficientes_invertidos[i]*tabela + anterior)
+        anterior = tabela
+        tabela = indices[i]
   
-    if(aux4 % 2 == 0):
-        indices[aux4-2] = -indices[aux4-2]
-        while(indices[aux4-2]<1):
-            indices[aux4-2] = indices[aux4-2] + num3
+    if(tamanho % 2 == 0):
+        indices[tamanho-2] = -indices[tamanho-2]
+        while(indices[tamanho-2]<1):
+            indices[tamanho-2] = indices[tamanho-2] + phi2
 
-    return indices[aux4-2]
+    inv = indices[tamanho-2]
+    return inv
 
 def fastModularExponentiation(m, e, n):
     if(e == 0):
