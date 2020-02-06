@@ -125,7 +125,6 @@ def desencriptar(nome_arquivo, d, n):
     palavras = ""
 
     for letra in arquivo:
-        letra = letra.strip()
         c = int(letra)
         c = fastModularExponentiation(c, d, n)
         palavras+= array[c]
@@ -225,6 +224,11 @@ def main():
 
             limpar_terminal()
 
+            print("  <==================================================>")
+            print("  <=       SUA MENSAGEM SE ENCONTRA NO ARQUIVO      =>")
+            print("  <=              msg_criptografada.txt             =>")
+            print("  <==================================================>")
+    
             msg_encriptada = []
             limpar_arquivo('msg_criptografada.txt')
             
@@ -235,11 +239,27 @@ def main():
     
         elif(escolha == 3):
             limpar_terminal()
-            print("  <==================================================>")
-            print("  <=       DIGITE O NOME DO ARQUIVO QUE DESEJA      =>")
-            print("  <=                  DESENCRIPTAR:                 =>")
-            print("  <==================================================>")
-            nome_arquivo = input("    Arquivo: ")
+            while(1):
+                print("  <==================================================>")
+                print("  <=       Deseja utilizar um arquivo externo?      =>")
+                print("  <=              (1)Sim      (2)Não                =>")
+                print("  <==================================================>")
+                escolha = int(input("    > "))
+                if(escolha == 1):
+                    print("  <==================================================>")
+                    print("  <=       DIGITE O NOME DO ARQUIVO QUE DESEJA      =>")
+                    print("  <=                  DESENCRIPTAR:                 =>")
+                    print("  <==================================================>")
+                    nome_arquivo = input("    Arquivo: ")
+                    break
+                elif(escolha == 2):
+                    nome_arquivo = "msg_criptografada"
+                    break
+                else:
+                    print("  <!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>")
+                    print("  <!!               Escolha inválida               !!>")
+                    print("  <!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>")
+                    
             print("  <==================================================>")
             print("  <=     PARA DESENCRIPTAR INSIRA OS VALORES DE:    =>")
             print("  <=                 (p), (q) e (e)                 =>")
@@ -247,6 +267,12 @@ def main():
             p = int(input("    (p): "))
             q = int(input("    (q): "))
             e = int(input("    (e): "))
+            limpar_terminal()
+
+            print("  <==================================================>")
+            print("  <=       SUA MENSAGEM SE ENCONTRA NO ARQUIVO      =>")
+            print("  <=            msg_descriptografada.txt            =>")
+            print("  <==================================================>")
 
             phi = calcular_phi(p, q)
             n = p * q
@@ -256,6 +282,7 @@ def main():
             
             limpar_arquivo('msg_descriptografada.txt')
             desencriptar(nome_arquivo, d, n)
+            
             print()
             
         elif(escolha == 4):
