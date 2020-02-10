@@ -114,8 +114,7 @@ def criptografar(c,e,n):
     for i in range(0,29):
         if(c == array[i]):
             aux = i
-    M = pow(aux, e)
-    M = M % n
+    M = fastModularExponentiation(aux, e, n)
     return M
 
 def desencriptar(nome_arquivo, d, n):
