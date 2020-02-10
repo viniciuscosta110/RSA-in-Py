@@ -182,7 +182,7 @@ def main():
             phi = calcular_phi(p, q)
             limpar_terminal()
             print("  <==================================================>")
-            print("  <=    INSIRA O (e) PARA GERAR A CHAVE PÚBLICA     =>")
+            print("  <=    Insira o (e) para gerar a chave pública:    =>")
             print("  <==================================================>")
             e = int(input("     (e): "))
             while(primos_entre_si(e,phi) == 0 or e >= phi or e <= 1):
@@ -218,10 +218,10 @@ def main():
             print("  <=          PRECISAMOS DA CHAVE PUBLICA!          =>")
             print("  <=              Digite o (n) e o (e)              =>")
             print("  <==================================================>")
-            n = int(input("  == (n): "))
-            e = int(input("  == (e): "))
+            n = int(input("     (n): "))
+            e = int(input("     (e): "))
             print("  <==================================================>")
-            print("  <=     DIGITE A SUA MENSAGEM PARA ENCRIPTA-LA     =>")
+            print("  <=    Digite a sua mensagem para encripta-la:     =>")
             print("  <==================================================>")
 
             texto = input("    > ")
@@ -229,10 +229,10 @@ def main():
 
             limpar_terminal()
 
-            print("  <==================================================>")
-            print("  <=       SUA MENSAGEM SE ENCONTRA NO ARQUIVO      =>")
-            print("  <=              msg_criptografada.txt             =>")
-            print("  <==================================================>")
+            print("  ####################################################")
+            print("           SUA MENSAGEM SE ENCONTRA NO ARQUIVO        ")
+            print("                  msg_criptografada.txt               ")
+            print("  ####################################################")
     
             msg_encriptada = []
             limpar_arquivo('msg_criptografada.txt')
@@ -252,8 +252,8 @@ def main():
                 escolha = int(input("    > "))
                 if(escolha == 1):
                     print("  <==================================================>")
-                    print("  <=       DIGITE O NOME DO ARQUIVO QUE DESEJA      =>")
-                    print("  <=                  DESENCRIPTAR:                 =>")
+                    print("  <=       Digite o nome do arquivo que deseja      =>")
+                    print("  <=                  desencriptar:                 =>")
                     print("  <==================================================>")
                     nome_arquivo = input("    Arquivo: ")
                     break
@@ -266,7 +266,7 @@ def main():
                     print("  <!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!>")
                     
             print("  <==================================================>")
-            print("  <=     PARA DESENCRIPTAR INSIRA OS VALORES DE:    =>")
+            print("  <=     Para desencriptar insira os valores de:    =>")
             print("  <=                 (p), (q) e (e)                 =>")
             print("  <==================================================>")
             p = int(input("    (p): "))
@@ -274,10 +274,10 @@ def main():
             e = int(input("    (e): "))
             limpar_terminal()
 
-            print("  <==================================================>")
-            print("  <=       SUA MENSAGEM SE ENCONTRA NO ARQUIVO      =>")
-            print("  <=            msg_descriptografada.txt            =>")
-            print("  <==================================================>")
+            print("  ####################################################")
+            print("           SUA MENSAGEM SE ENCONTRA NO ARQUIVO        ")
+            print("                msg_descriptografada.txt              ")
+            print("  ####################################################")
 
             phi = calcular_phi(p, q)
             n = p * q
