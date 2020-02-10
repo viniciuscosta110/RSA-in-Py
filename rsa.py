@@ -178,6 +178,15 @@ def main():
                         print("  <==================================================>")
                         p = int(input("      Digite (p):"))
                         q = int(input("      Digite (q):"))
+            if(p == q):
+                    while(p == q):
+                        limpar_terminal()
+                        print("  <==================================================>")
+                        print("  <=             (p) e (q) são iguais!              =>")
+                        print("  <=              Digite-os novamente!              =>")
+                        print("  <==================================================>")
+                        p = int(input("      Digite (p):"))
+                        q = int(input("      Digite (q):"))
             n = p * q
             phi = calcular_phi(p, q)
             limpar_terminal()
