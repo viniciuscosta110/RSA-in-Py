@@ -243,11 +243,9 @@ def main():
             print("                  msg_criptografada.txt               ")
             print("  ####################################################")
     
-            msg_encriptada = []
             limpar_arquivo('msg_criptografada.txt')
             
             for i in range(0,len(texto)):
-                msg_encriptada.append(criptografar(texto[i], e, n))
                 msg_criptografada(criptografar(texto[i], e, n))
             print()
     
